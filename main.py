@@ -35,8 +35,7 @@ def main():
         return
 
     print("--- Begin report of books/frankenstein.txt ---")
-    print(f"{count_words(file_contents)} words found in the document")
-    print("")
+    print(f"{count_words(file_contents)} words found in the document \n")
     
     char_counts = count_chars(file_contents)
     sorted_chars = sorted(char_counts.items(), key=lambda item: item[1], reverse=True)
