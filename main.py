@@ -20,9 +20,6 @@ def count_words(text):
 
     return counter
 
-def sort_on(dict):
-    return dict["char"]
-
 def main():
     with open("books/frankenstein.txt") as f:
         file_contents = f.read()
