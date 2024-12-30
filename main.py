@@ -1,3 +1,5 @@
+import argparse
+
 def count_chars(text):
     char_dict = {}
 
@@ -21,8 +23,16 @@ def count_words(text):
     return counter
 
 def main():
-    with open("books/frankenstein.txt") as f:
-        file_contents = f.read()
+    parser = argparse.ArgumentParser(description="Generate a report of character and word counts from a text file.")
+    parser.add_argument("file", help="Path to the text file to analyze")
+    args = parser.parse_args()
+
+    try:
+        with open(args.file, "r") as f:
+            file_contents = f.read()
+    except FileNotFoundError:
+        print(f"Error: File '{args.file}' not found.")
+        return
 
     print("--- Begin report of books/frankenstein.txt ---")
     print(f"{count_words(file_contents)} words found in the document")
