@@ -1,8 +1,13 @@
+"""
+BookBoot that counts the words in books
+"""
 import sys
-from stats import count_chars, count_words
+from stats import count_chars, get_num_words
 
 def main():
-
+    """
+    Main function
+    """
     if len(sys.argv) < 2:
         print("Usage: python3 main.py <path_to_book>")
         sys.exit(1)
@@ -18,14 +23,14 @@ def main():
     print("============ BOOKBOT ============")
     print(f"Analyzing book found at {file}...")
     print("----------- Word Count ----------")
-    print(f"Found {count_words(file_contents)} total words")
+    print(f"Found {get_num_words(file_contents)} total words")
     print("--------- Character Count -------")
     char_counts = count_chars(file_contents)
     sorted_chars = sorted(char_counts.items(), key=lambda item: item[1], reverse=True)
 
     for char, count in sorted_chars:
         print(f"{char}: {count}")
-    
+
     print("============= END ===============")
 
 if __name__ == '__main__':
