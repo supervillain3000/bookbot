@@ -1,4 +1,4 @@
-import argparse
+import sys
 
 def count_chars(text):
     char_dict = {}
@@ -23,27 +23,31 @@ def count_words(text):
     return counter
 
 def main():
-    parser = argparse.ArgumentParser(description="Generate a report of character and word counts from a text file.")
-    parser.add_argument("file", help="Path to the text file to analyze")
-    args = parser.parse_args()
+
+    if len(sys.argv) < 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    file = sys.argv[1]
 
     try:
-        with open(args.file, "r") as f:
+        with open(file, "r", encoding='utf-8') as f:
             file_contents = f.read()
     except FileNotFoundError:
-        print(f"Error: File '{args.file}' not found.")
-        return
-
-    print("--- Begin report of books/frankenstein.txt ---")
-    print(f"{count_words(file_contents)} words found in the document \n")
-    
+        print(f"Error: File {file} not found.")
+        sys.exit(1)
+    print("============ BOOKBOT ============")
+    print(f"Analyzing book found at {file}...")
+    print("----------- Word Count ----------")
+    print(f"Found {count_words(file_contents)} total words")
+    print("--------- Character Count -------")
     char_counts = count_chars(file_contents)
     sorted_chars = sorted(char_counts.items(), key=lambda item: item[1], reverse=True)
 
     for char, count in sorted_chars:
-        print(f"The {char} character was found {count} times")
+        print(f"{char}: {count}")
     
-    print("--- End report ---")
+    print("============= END ===============")
 
 if __name__ == '__main__':
     main()
